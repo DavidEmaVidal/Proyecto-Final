@@ -1,12 +1,18 @@
 package com.example.demo.TomaMiManoWeb.Entidades;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
 public class Operacion {
 	
 @Id
+@GeneratedValue(generator = "uuid")
+@GenericGenerator(name = "uuid", strategy = "uuid2")
+
 private String id_Operacion;
 private String titulo;
 private String detalle;
