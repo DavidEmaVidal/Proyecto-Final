@@ -11,7 +11,7 @@
 	<groupId>com.example</groupId>
 	<artifactId>TomaMiManoWeb</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>TomaMiManoWeb</name>
+	<name>com.example.demo.TomaMiManoWeb</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
