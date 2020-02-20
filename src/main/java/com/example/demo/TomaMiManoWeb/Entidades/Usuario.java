@@ -16,7 +16,6 @@ public class Usuario {
     @Temporal(TemporalType.DATE)
     private Date fecha_nac;
     private Integer creditos;
-    private String vel;
     public Usuario() {
     }
 
