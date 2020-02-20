@@ -17,7 +17,7 @@ public class Foto {
 	private byte[] contenido;
 	
 	public Foto() {
-		super();
+	
 	}
 
 	public String getId_foto() {

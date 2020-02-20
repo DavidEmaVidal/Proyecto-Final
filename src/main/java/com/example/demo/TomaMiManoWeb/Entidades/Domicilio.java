@@ -4,8 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 @Entity
 public class Domicilio {
-    @Id
-private String id_domicilio;
+ @Id
+ private String id_domicilio;
  private String calle;
  private int nro;
 
