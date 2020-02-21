@@ -13,10 +13,10 @@ import java.util.List;
 
 @Repository
 public interface MatchRepositorio extends JpaRepository<Match,String> {
-    @Query("SELECT c FROM Voto c WHERE c.usuario_receptor.id_usu= :id_usu ORDER BY c.fecha DESC")
+    @Query("SELECT c FROM Match c WHERE c.usuario_receptor.id_usu= :id_usu ORDER BY c.fecha DESC")
     public List<Match> buscarMatchRecibidos(@Param("id")String id );
 
-    @Query("SELECT c FROM Voto c WHERE c.usuario_dador.id_usu= :id_usu ORDER BY c.fecha DESC")
+    @Query("SELECT c FROM Match c WHERE c.usuario_dador.id_usu= :id_usu ORDER BY c.fecha DESC")
     public List<Match> buscarMatchDados(@Param("id_usu")String id_usu );
 
 
