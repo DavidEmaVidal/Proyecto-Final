@@ -1,4 +1,4 @@
-package com.example.demo.TomaMiManoWeb.Entidades;
+package com.example.demo.TomaMiManoWeb.entidades;
 
 import com.example.demo.TomaMiManoWeb.enumeraciones.Sexo;
 import org.hibernate.annotations.GenericGenerator;
@@ -21,6 +21,9 @@ public class Usuario {
 
     @Enumerated(EnumType.STRING)
     private Sexo sexo;
+    @OneToOne
+    private Foto foto;
+
     public Usuario() {
     }
 
@@ -78,5 +81,13 @@ public class Usuario {
 
     public void setSexo(Sexo sexo) {
         this.sexo = sexo;
+    }
+
+    public Foto getFoto() {
+        return foto;
+    }
+
+    public void setFoto(Foto foto) {
+        this.foto = foto;
     }
 }

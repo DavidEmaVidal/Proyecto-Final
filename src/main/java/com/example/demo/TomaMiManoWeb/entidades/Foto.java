@@ -1,4 +1,4 @@
-package com.example.demo.TomaMiManoWeb.Entidades;
+package com.example.demo.TomaMiManoWeb.entidades;
 
 import org.hibernate.annotations.GenericGenerator;
 
