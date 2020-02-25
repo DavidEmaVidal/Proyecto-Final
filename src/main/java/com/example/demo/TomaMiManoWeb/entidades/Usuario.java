@@ -24,6 +24,8 @@ public class Usuario {
     @OneToOne
     private Foto foto;
 
+    private double valoracionPersonal;
+
     public Usuario() {
     }
 
@@ -89,5 +91,13 @@ public class Usuario {
 
     public void setFoto(Foto foto) {
         this.foto = foto;
+    }
+
+    public double getValoracionPersonal() {
+        return valoracionPersonal;
+    }
+
+    public void setValoracionPersonal(double valoracionPersonal) {
+        this.valoracionPersonal = valoracionPersonal;
     }
 }
