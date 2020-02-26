@@ -1,14 +1,19 @@
 package com.example.demo.TomaMiManoWeb.Entidades;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
+
 @Entity
 public class Domicilio {
  @Id
+ @GeneratedValue(generator = "uuid")
+ @GenericGenerator(name = "uuid", strategy = "uuid2")
  private String id_domicilio;
  private String calle;
  private int nro;
-
+ @ManyToOne
+ private Zona zona;
     public Domicilio() {
     }
 
@@ -34,5 +39,13 @@ public class Domicilio {
 
     public void setNro(int nro) {
         this.nro = nro;
+    }
+
+    public Zona getZona() {
+        return zona;
+    }
+
+    public void setZona(Zona zona) {
+        this.zona = zona;
     }
 }

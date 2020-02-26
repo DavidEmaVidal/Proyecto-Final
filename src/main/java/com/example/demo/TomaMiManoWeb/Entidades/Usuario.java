@@ -1,14 +1,15 @@
 package com.example.demo.TomaMiManoWeb.Entidades;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 public class Usuario {
     @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id_usu;
     private String dni;
     private String nombre;
@@ -16,6 +17,9 @@ public class Usuario {
     @Temporal(TemporalType.DATE)
     private Date fecha_nac;
     private Integer creditos;
+
+    @ManyToOne
+     private Domicilio domicilio;
     public Usuario() {
     }
 
@@ -65,5 +69,13 @@ public class Usuario {
 
     public void setCreditos(Integer creditos) {
         this.creditos = creditos;
+    }
+
+    public Domicilio getDomicilio() {
+        return domicilio;
+    }
+
+    public void setDomicilio(Domicilio domicilio) {
+        this.domicilio = domicilio;
     }
 }
