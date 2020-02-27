@@ -14,7 +14,7 @@ public interface ValoracionRepositorio extends JpaRepository<Valoracion, String>
     @Query("SELECT c FROM Valoracion c WHERE c.usuario.id_usu= :id_usu ")
     public List<Valoracion> buscarValoracionesRecibidos(@Param("id_usu") String id_usu);
 
-    @Query("SELECT avg(puntaje) FROM Valoracion  WHERE Valoracion.usuario.id_usu= :id_usu ")
+    @Query("SELECT avg(puntaje) FROM Valoracion c WHERE c.usuario.id_usu= :id_usu ")
     public double promedioValoracion(@Param("id_usu") String id_usu);
 
 

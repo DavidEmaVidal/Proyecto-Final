@@ -4,6 +4,7 @@ import com.example.demo.TomaMiManoWeb.entidades.Match;
 import com.example.demo.TomaMiManoWeb.entidades.Usuario;
 import com.example.demo.TomaMiManoWeb.errores.ErrorServicio;
 import com.example.demo.TomaMiManoWeb.repositorios.MatchRepositorio;
+import com.example.demo.TomaMiManoWeb.repositorios.UsuarioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

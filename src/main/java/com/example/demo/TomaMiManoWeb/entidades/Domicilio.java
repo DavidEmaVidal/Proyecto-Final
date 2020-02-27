@@ -3,6 +3,7 @@ package com.example.demo.TomaMiManoWeb.entidades;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 @Entity
@@ -13,6 +14,8 @@ public class Domicilio {
  private String id_domicilio;
  private String calle;
  private int nro;
+ @Enumerated
+ private String departamento;
 
     public Domicilio() {
     }
@@ -39,5 +42,23 @@ public class Domicilio {
 
     public void setNro(int nro) {
         this.nro = nro;
+    }
+
+    public String getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(String departamento) {
+        this.departamento = departamento;
+    }
+
+    @Override
+    public String toString() {
+        return "Domicilio{" +
+                "id_domicilio='" + id_domicilio + '\'' +
+                ", calle='" + calle + '\'' +
+                ", nro=" + nro +
+                ", departamento='" + departamento + '\'' +
+                '}';
     }
 }

@@ -1,6 +1,8 @@
 package com.example.demo.TomaMiManoWeb.servicios;
 
+import com.example.demo.TomaMiManoWeb.entidades.Usuario;
 import com.example.demo.TomaMiManoWeb.entidades.Valoracion;
+import com.example.demo.TomaMiManoWeb.repositorios.UsuarioRepositorio;
 import com.example.demo.TomaMiManoWeb.repositorios.ValoracionRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,11 +41,6 @@ public class ValoracionServicio {
         Usuario usuario = usuariorepositorio.getOne(id_valoracion);
         double auxpromedio = valoracionrepositorio.promedioValoracion(id_valoracion);
         usuario.setValoracionPersonal(auxpromedio);
-        usuario.setDni(usuario.getDni());
-        usuario.setNombre(usuario.getNombre);
-        usuario.setApellido(usuario.getApellido);
-        usuario.setFecha_nac(usuario.getFecha_nac);
-        usuario.setCreditos(usuario.Creditos);
         valoracionrepositorio.save(usuario);
     }
 }

@@ -54,8 +54,14 @@ public void setTipo_Operacion(String tipo_Operacion) {
 	this.tipo_Operacion = tipo_Operacion;
 }
 
-	
-	
-	
 
+	@Override
+	public String toString() {
+		return "Operacion{" +
+				"id_Operacion='" + id_Operacion + '\'' +
+				", titulo='" + titulo + '\'' +
+				", detalle='" + detalle + '\'' +
+				", tipo_Operacion='" + tipo_Operacion + '\'' +
+				'}';
+	}
 }

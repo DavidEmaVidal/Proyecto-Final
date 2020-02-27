@@ -3,6 +3,7 @@ package com.example.demo.TomaMiManoWeb.entidades;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Arrays;
 
 @Entity
 public class Foto {
@@ -51,10 +52,15 @@ public class Foto {
 	public void setContenido(byte[] contenido) {
 		this.contenido = contenido;
 	}
-	
-	
-	
-	
-	
-	
+
+
+	@Override
+	public String toString() {
+		return "Foto{" +
+				"id_foto='" + id_foto + '\'' +
+				", nombre='" + nombre + '\'' +
+				", mime='" + mime + '\'' +
+				", contenido=" + Arrays.toString(contenido) +
+				'}';
+	}
 }
