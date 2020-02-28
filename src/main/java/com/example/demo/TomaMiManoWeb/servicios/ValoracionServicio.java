@@ -8,8 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class ValoracionServicio {
@@ -22,7 +21,7 @@ public class ValoracionServicio {
     public void valorarUsuario(String id_valoracion, String puntaje, String comentario) {
 
         Usuario usuario = usuariorepositorio.getOne(id_valoracion);
-        //debo convertirlo a un numero ya que en html se como String (parsear)
+        //debo convertirlo a un numero ya que en html se ve como String (parsear)
         int puntajeparseado = Integer.parseInt(puntaje);
 
         Valoracion valoracion = new Valoracion();
@@ -41,6 +40,6 @@ public class ValoracionServicio {
         Usuario usuario = usuariorepositorio.getOne(id_valoracion);
         double auxpromedio = valoracionrepositorio.promedioValoracion(id_valoracion);
         usuario.setValoracionPersonal(auxpromedio);
-        valoracionrepositorio.save(usuario);
+        usuariorepositorio.save(usuario);
     }
 }
