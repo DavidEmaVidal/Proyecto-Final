@@ -1,7 +1,9 @@
 package com.example.demo.TomaMiManoWeb.Entidades;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import com.example.demo.TomaMiManoWeb.enumeraciones.Sexo;
+import com.example.demo.TomaMiManoWeb.enumeraciones.TipoOperacion;
+
+import javax.persistence.*;
 
 @Entity
 public class Operacion {
@@ -10,8 +12,12 @@ public class Operacion {
 private String id_Operacion;
 private String titulo;
 private String detalle;
-private String tipo_Operacion;
-
+@Enumerated(EnumType.STRING)
+private TipoOperacion tipoOperacion;
+@ManyToOne
+private  Usuario usuario;
+@OneToOne
+private Foto foto;
 public Operacion() {
 	
 }
@@ -40,16 +46,27 @@ public void setDetalle(String detalle) {
 	this.detalle = detalle;
 }
 
-public String getTipo_Operacion() {
-	return tipo_Operacion;
-}
+	public Foto getFoto() {
+		return foto;
+	}
 
-public void setTipo_Operacion(String tipo_Operacion) {
-	this.tipo_Operacion = tipo_Operacion;
-}
+	public void setFoto(Foto foto) {
+		this.foto = foto;
+	}
 
-	
-	
-	
+	public Usuario getUsuario() {
+		return usuario;
+	}
 
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public TipoOperacion getTipoOperacion() {
+		return tipoOperacion;
+	}
+
+	public void setTipoOperacion(TipoOperacion tipoOperacion) {
+		this.tipoOperacion = tipoOperacion;
+	}
 }

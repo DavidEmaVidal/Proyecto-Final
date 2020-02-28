@@ -5,6 +5,7 @@ import com.example.demo.TomaMiManoWeb.Entidades.Usuario;
 import com.example.demo.TomaMiManoWeb.Errores.ErrorServicio;
 import com.example.demo.TomaMiManoWeb.Repositorios.MatchRepositorio;
 
+import com.example.demo.TomaMiManoWeb.Repositorios.OperacionRepositorio;
 import com.example.demo.TomaMiManoWeb.Repositorios.UsuarioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,11 +20,13 @@ public class MatchServicio {
     private UsuarioRepositorio usuarioRepositorio;
     @Autowired
     private MatchRepositorio matchRepositorio;
-
+    @Autowired
+    private OperacionRepositorio operacionRepositorio;
     @Transactional
-    public void match(String id_usu1, String id_usu2) throws ErrorServicio {
+    public void match(String id_usu1, String id_usu2,String id_Operacion) throws ErrorServicio {
         Match match = new Match();
         match.setFecha_pedido(new Date());
+        match.setOperacion(operacionRepositorio.getOne(id_Operacion));
         if (id_usu1.endsWith(id_usu2)) {
 
             throw new ErrorServicio("No puede votarse a si mismo");
@@ -42,8 +45,9 @@ public class MatchServicio {
             match.setUsuario_dador(usuario_dador);
             //notificacionServicio.enviar("Tus servicios han sido requeridos", "Toma mi Mano", match.getUsuario_dador().getMail());
         } else {
-            throw new ErrorServicio("No existe un usuario vinculad con ese identificador ");
+            throw new ErrorServicio("No existe un usuario vinculado con ese identificador ");
         }
+
         matchRepositorio.save(match);
     }
 
@@ -54,6 +58,7 @@ public class MatchServicio {
             Match match = respuesta.get();
             match.setFecha_confirmacion(new Date());
             if (match.getUsuario_dador().equals(id_usu)) {
+
               //  notificacionServicio.enviar("Tu solicitud ha sido aceptada", "Toma mi Mano", match.getUsuario_receptor().getMail());
                 matchRepositorio.save(match);
             } else {

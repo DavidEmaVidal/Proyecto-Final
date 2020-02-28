@@ -4,12 +4,9 @@ package com.example.demo.TomaMiManoWeb.Entidades;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
+import com.example.demo.TomaMiManoWeb.enumeraciones.Sexo;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
@@ -24,9 +21,22 @@ public class Usuario {
 	private String apellido;
 	private String clave;
 	private int credito;
-	
+	private double valoracionpersonal;
+	private String mail;
+	@Enumerated(EnumType.STRING)
+	private Sexo sexo;
+	@OneToOne
+	private Foto foto;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fecha_nac;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date alta;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date baja;
+
+	public Usuario() {
+		credito=1;
+	}
 
 	public String getId() {
 		return id;
@@ -85,14 +95,52 @@ public class Usuario {
 	public void setFecha_nac(Date fecha_nac) {
 		this.fecha_nac = fecha_nac;
 	}
-	
-	
-	
-	
-	
-	
 
-	
-	
-	
+	public Sexo getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(Sexo sexo) {
+		this.sexo = sexo;
+	}
+
+	public Foto getFoto() {
+		return foto;
+	}
+
+	public void setFoto(Foto foto) {
+		this.foto = foto;
+	}
+
+	public double getValoracionpersonal() {
+		return valoracionpersonal;
+	}
+
+	public void setValoracionpersonal(double valoracionpersonal) {
+		this.valoracionpersonal = valoracionpersonal;
+	}
+
+	public Date getAlta() {
+		return alta;
+	}
+
+	public void setAlta(Date alta) {
+		this.alta = alta;
+	}
+
+	public Date getBaja() {
+		return baja;
+	}
+
+	public void setBaja(Date baja) {
+		this.baja = baja;
+	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
 }
