@@ -4,9 +4,9 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import com.example.demo.TomaMiManoWeb.Entidades.Zona;
-import com.example.demo.TomaMiManoWeb.Repositorios.ZonaRepositorio;
-import com.example.demo.TomaMiManoWeb.enumeraciones.Sexo;
+import com.example.demo.TomaMiManoWeb.Entidades.Domicilio;
+import com.example.demo.TomaMiManoWeb.Enumeraciones.Departamento;
+import com.example.demo.TomaMiManoWeb.Enumeraciones.Sexo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -25,20 +25,18 @@ public class UsuarioServicio implements UserDetailsService{
 
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
-
-    @Autowired
-    private ZonaRepositorio zonaRepositorio;
-
     @Autowired
     private FotoServicio fotoServicio;
+    @Autowired
+    private DomicilioServicio domicilioServicio;
     
     @Transactional //con esto estamos diciendo q si el metodo no larga ninguna execpcion, entonces hace un comit a la base de datos y se aplican todos los cambios. En el caso q exista una excepcion y no es atrapada se vuelve atras con la transaccion  y no se aplica nada en la base de datos
-    public void registrar(MultipartFile archivo, String  dni, String nombre, String apellido, String clave, int credito, String idZona, Sexo sexo) throws ErrorServicio
+    public void registrar(MultipartFile archivo, String  dni, String nombre, String apellido, String clave, int credito, String calle, int nro, Departamento depto, Sexo sexo) throws ErrorServicio
     {
 
-    	Zona zona = zonaRepositorio.getOne(idZona);
 
-        validar(dni,nombre,apellido,clave,idZona);
+
+        validar(dni,nombre,apellido,clave);
         
         Usuario usuario = new Usuario();
         usuario.setDni(dni);
@@ -48,6 +46,8 @@ public class UsuarioServicio implements UserDetailsService{
         usuario.setCredito(credito);
         usuario.setSexo(sexo);
         Foto foto = fotoServicio.guardar(archivo);
+        Domicilio domicilio =  domicilioServicio.registrarDomicilio(calle,nro,depto);
+        usuario.setDomicilio(domicilio);
         usuario.setFoto(foto);
     	
         usuarioRepositorio.save(usuario);
@@ -56,12 +56,10 @@ public class UsuarioServicio implements UserDetailsService{
     }
     
     @Transactional
-    public void modificar(MultipartFile archivo,String  dni, String nombre,String apellido, String clave, int credito,String idZona) throws ErrorServicio
+    public void modificar(MultipartFile archivo,String  dni, String nombre,String apellido, String clave, int credito) throws ErrorServicio
     {
-    
-    	Zona zona = zonaRepositorio.getOne(idZona);
-    	
-        validar(dni,nombre,apellido,clave, idZona);
+
+        validar(dni,nombre,apellido,clave);
         
         Optional<Usuario> respuesta = (Optional<Usuario>) usuarioRepositorio.findById(dni);
         
@@ -97,15 +95,11 @@ public class UsuarioServicio implements UserDetailsService{
     
     }
     
-    private void validar(String dni,String nombre, String apellido,String clave,String idZona) throws ErrorServicio
+    private void validar(String dni,String nombre, String apellido,String clave) throws ErrorServicio
 	{
 	    if(clave == null || clave.isEmpty())
         {
         throw new ErrorServicio("Debe ingresar una clave para el cliente !!.");
-        }
-        if(idZona == null || idZona.isEmpty())
-        {
-            throw new ErrorServicio("Debe seleccionar una zona");
         }
 		if(nombre == null || nombre.isEmpty())
 		{

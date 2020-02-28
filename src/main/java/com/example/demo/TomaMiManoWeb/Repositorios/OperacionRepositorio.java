@@ -5,7 +5,7 @@ package com.example.demo.TomaMiManoWeb.Repositorios;
 import com.example.demo.TomaMiManoWeb.Entidades.Operacion;
 import java.util.List;
 
-import com.example.demo.TomaMiManoWeb.enumeraciones.TipoOperacion;
+import com.example.demo.TomaMiManoWeb.Enumeraciones.TipoOperacion;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

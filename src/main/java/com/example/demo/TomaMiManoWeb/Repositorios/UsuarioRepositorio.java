@@ -10,8 +10,8 @@ import com.example.demo.TomaMiManoWeb.Entidades.Usuario;
 @Repository
 public interface UsuarioRepositorio extends JpaRepository<Usuario, String> {
 
-	@Query("SELECT c FROM Usuario c WHERE c.mail = :dni")
-	public Usuario buscarPorMail(@Param("dni") String dni);
+	@Query("SELECT c FROM Usuario c WHERE c.mail = :mail")
+	public Usuario buscarPorMail(@Param("mail") String mail);
 
 
 }

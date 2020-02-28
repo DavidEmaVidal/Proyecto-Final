@@ -1,7 +1,6 @@
 package com.example.demo.TomaMiManoWeb.Entidades;
 
-import com.example.demo.TomaMiManoWeb.enumeraciones.Sexo;
-import com.example.demo.TomaMiManoWeb.enumeraciones.TipoOperacion;
+import com.example.demo.TomaMiManoWeb.Enumeraciones.TipoOperacion;
 
 import javax.persistence.*;
 

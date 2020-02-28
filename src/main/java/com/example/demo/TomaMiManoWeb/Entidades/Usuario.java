@@ -6,7 +6,7 @@ import java.util.Date;
 
 import javax.persistence.*;
 
-import com.example.demo.TomaMiManoWeb.enumeraciones.Sexo;
+import com.example.demo.TomaMiManoWeb.Enumeraciones.Sexo;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
@@ -27,6 +27,8 @@ public class Usuario {
 	private Sexo sexo;
 	@OneToOne
 	private Foto foto;
+	@OneToOne
+	private Domicilio domicilio;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fecha_nac;
 	@Temporal(TemporalType.TIMESTAMP)
@@ -142,5 +144,13 @@ public class Usuario {
 
 	public void setMail(String mail) {
 		this.mail = mail;
+	}
+
+	public Domicilio getDomicilio() {
+		return domicilio;
+	}
+
+	public void setDomicilio(Domicilio domicilio) {
+		this.domicilio = domicilio;
 	}
 }

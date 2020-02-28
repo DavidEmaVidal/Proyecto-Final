@@ -1,4 +1,4 @@
-package com.example.demo.TomaMiManoWeb.enumeraciones;
+package com.example.demo.TomaMiManoWeb.Enumeraciones;
 
 public enum TipoOperacion {
     Producto,

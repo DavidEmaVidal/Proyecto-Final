@@ -1,5 +1,6 @@
 package com.example.demo.TomaMiManoWeb.Entidades;
 
+import com.example.demo.TomaMiManoWeb.Enumeraciones.Departamento;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -12,8 +13,9 @@ public class Domicilio {
  private String id_domicilio;
  private String calle;
  private int nro;
- @ManyToOne
- private Zona zona;
+@Enumerated(EnumType.STRING)
+private Departamento departamento;
+
     public Domicilio() {
     }
 
@@ -41,11 +43,11 @@ public class Domicilio {
         this.nro = nro;
     }
 
-    public Zona getZona() {
-        return zona;
+    public Departamento getDepartamento() {
+        return departamento;
     }
 
-    public void setZona(Zona zona) {
-        this.zona = zona;
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
     }
 }
