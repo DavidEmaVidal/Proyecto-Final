@@ -19,28 +19,37 @@ public class ValoracionServicio {
     private UsuarioRepositorio usuariorepositorio;
 
     @Transactional
-    public void valorarUsuario(String id_valoracion, String puntaje, String comentario) {
+    public void valorarUsuario(String dni,String id_valoracion, String puntaje, String comentario) {
 
-        Usuario usuario = usuariorepositorio.getOne(id_valoracion);
+        Usuario usuario = usuariorepositorio.getOne(dni);
         //debo convertirlo a un numero ya que en html se como String (parsear)
         int puntajeparseado = Integer.parseInt(puntaje);
 
         Valoracion valoracion = new Valoracion();
         valoracion.setUsuario(usuario);
         valoracion.setPuntaje(puntajeparseado);
-        comentario = comentario.toUpperCase();
-        valoracion.setComentario(comentario);
+        //  comentario = comentario.toUpperCase();
+        valoracion.setComentario(comentario.toUpperCase());
 
         valoracionrepositorio.save(valoracion);
-        promedio(id_valoracion, puntaje);
+        promedio( dni,id_valoracion, puntaje);
 
     }
 
 
-    public void promedio(String id_valoracion, String puntaje) {
-        Usuario usuario = usuariorepositorio.getOne(id_valoracion);
+    public void promedio(String dni,String id_valoracion, String puntaje) {
+        Usuario usuario = usuariorepositorio.getOne(dni);
+       // List<Valoracion> valoracions = valoracionrepositorio.buscartodaslasValoraciones(dni);
+        //Integer total=0;
+        //int cant_valo=0;
+        //for (Valoracion valoracion: valoracions
+        //     ) {
+        //    total =valoracion.getPuntaje();
+        //    cant_valo++;
+        //}
+        //usuario.setValoracionpersonal(total/cant_valo);
         double auxpromedio = valoracionrepositorio.promedioValoracion(id_valoracion);
-        //usuario.setValoracionPersonal(auxpromedio);
+        usuario.setValoracionpersonal(auxpromedio);
         usuario.setDni(usuario.getDni());
         usuario.setNombre(usuario.getNombre());
         usuario.setApellido(usuario.getApellido());

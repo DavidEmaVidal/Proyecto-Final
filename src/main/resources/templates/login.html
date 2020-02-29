@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/login2.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap"
+      rel="stylesheet"
+    />
+    <title>#Intercambio</title>
+  </head>
+
+  <body>
+    <div id="form_wrapper">
+      <aside>
+
+      </aside>
+      <section>
+        <h1>Bienvenidx</h1>
+        <form action="" method="post">
+          <ul>
+            <li>
+              <input
+                placeholder="DNI"
+                type="text"
+                name="dni"
+                id="dni"
+                class="input_field" required
+              />
+            </li>
+            <li>
+              <input
+                placeholder="Contraseña"
+                type="password"
+                name="pass"
+                id="pass"
+                class="input_field" required minlength="6" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+              />
+            </li>
+          </ul>
+          <button type="submit" id="button-submit">
+            ENTRÁ
+          </button>
+          <span>¿Todavía no formás parte?</span>
+          <button id="button-link"><a href="registro.html">UNITE</a></button>
+        </form>
+        
+      </section>
+    </div>
+  </body>
+</html>

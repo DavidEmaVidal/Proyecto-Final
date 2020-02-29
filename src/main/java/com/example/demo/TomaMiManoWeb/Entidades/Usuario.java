@@ -15,13 +15,12 @@ public class Usuario {
 	@Id
 	@GeneratedValue(generator = "uuid")
 	@GenericGenerator(name = "uuid",strategy = "uuid2")
-	private String id;
 	private String dni;
 	private String nombre;
 	private String apellido;
 	private String clave;
 	private int credito;
-	private double valoracionpersonal;
+	private double valoracionpersonal; //promedio;
 	private String mail;
 	@Enumerated(EnumType.STRING)
 	private Sexo sexo;
@@ -40,13 +39,6 @@ public class Usuario {
 		credito=1;
 	}
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	public String getDni() {
 		return dni;

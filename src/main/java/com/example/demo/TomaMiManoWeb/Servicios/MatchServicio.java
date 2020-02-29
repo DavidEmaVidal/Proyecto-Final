@@ -25,7 +25,7 @@ public class MatchServicio {
     @Transactional
     public void match(String id_usu1, String id_usu2,String id_Operacion) throws ErrorServicio {
         Match match = new Match();
-        match.setFecha_pedido(new Date());
+        match.setInicio(new Date());
         match.setOperacion(operacionRepositorio.getOne(id_Operacion));
         if (id_usu1.endsWith(id_usu2)) {
 
@@ -56,7 +56,7 @@ public class MatchServicio {
         Optional<Match> respuesta = matchRepositorio.findById(id_match);
         if (respuesta.isPresent()) {
             Match match = respuesta.get();
-            match.setFecha_confirmacion(new Date());
+            match.setRespuesta(new Date());
             if (match.getUsuario_dador().equals(id_usu)) {
 
               //  notificacionServicio.enviar("Tu solicitud ha sido aceptada", "Toma mi Mano", match.getUsuario_receptor().getMail());

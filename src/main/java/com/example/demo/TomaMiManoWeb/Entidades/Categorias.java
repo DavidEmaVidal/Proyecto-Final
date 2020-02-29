@@ -43,10 +43,4 @@ public class Categorias {
         this.operacion = operacion;
     }
     
-    
-   
-    
-    
-    
-    
 }

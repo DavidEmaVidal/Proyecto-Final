@@ -31,7 +31,7 @@ public class UsuarioServicio implements UserDetailsService{
     private DomicilioServicio domicilioServicio;
     
     @Transactional //con esto estamos diciendo q si el metodo no larga ninguna execpcion, entonces hace un comit a la base de datos y se aplican todos los cambios. En el caso q exista una excepcion y no es atrapada se vuelve atras con la transaccion  y no se aplica nada en la base de datos
-    public void registrar(MultipartFile archivo, String  dni, String nombre, String apellido, String clave, int credito, String calle, int nro, Departamento depto, Sexo sexo) throws ErrorServicio
+    public void registrar(MultipartFile archivo, String  dni, String nombre, String apellido, String clave,String calle, int nro, Departamento depto, Sexo sexo) throws ErrorServicio
     {
 
 
@@ -43,7 +43,7 @@ public class UsuarioServicio implements UserDetailsService{
         usuario.setNombre(nombre);
         usuario.setApellido(apellido);
         usuario.setClave(clave);
-        usuario.setCredito(credito);
+        usuario.setCredito(1);
         usuario.setSexo(sexo);
         Foto foto = fotoServicio.guardar(archivo);
         Domicilio domicilio =  domicilioServicio.registrarDomicilio(calle,nro,depto);

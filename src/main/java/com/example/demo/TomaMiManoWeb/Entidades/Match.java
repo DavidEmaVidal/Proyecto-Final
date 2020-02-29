@@ -1,14 +1,13 @@
 package com.example.demo.TomaMiManoWeb.Entidades;
 
 
-import com.example.demo.TomaMiManoWeb.Entidades.Operacion;
-import com.example.demo.TomaMiManoWeb.Entidades.Usuario;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name ="uniones")
 public class Match {
     @Id
     @GeneratedValue(generator = "uuid")
@@ -23,9 +22,10 @@ public class Match {
     private Operacion operacion;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date fecha_pedido;
+    private Date inicio;
+
     @Temporal(TemporalType.TIMESTAMP)
-    private Date fecha_confirmacion;
+    private Date respuesta;
 
     public Match() {
     }
@@ -62,20 +62,20 @@ public class Match {
     public void setOperacion(Operacion operacion) {
         this.operacion = operacion;
     }
-    public Date getFecha_pedido() {
-        return fecha_pedido;
+    public Date getInicio() {
+        return inicio;
     }
 
-    public void setFecha_pedido(Date fecha_pedido) {
-        this.fecha_pedido = fecha_pedido;
+    public void setInicio(Date fecha_pedido) {
+        this.inicio = fecha_pedido;
     }
 
-    public Date getFecha_confirmacion() {
-        return fecha_confirmacion;
+    public Date getRespuesta() {
+        return respuesta;
     }
 
-    public void setFecha_confirmacion(Date fecha_confirmacion) {
-        this.fecha_confirmacion = fecha_confirmacion;
+    public void setRespuesta(Date fecha_confirmacion) {
+        this.respuesta = fecha_confirmacion;
     }
 
 
