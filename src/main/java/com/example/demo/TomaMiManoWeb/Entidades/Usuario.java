@@ -5,21 +5,26 @@ package com.example.demo.TomaMiManoWeb.Entidades;
 import java.util.Date;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import com.example.demo.TomaMiManoWeb.Enumeraciones.Sexo;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Usuario {
 
 	@Id
 	@GeneratedValue(generator = "uuid")
-	@GenericGenerator(name = "uuid",strategy = "uuid2")
+	@GenericGenerator(name = "uuid", strategy = "uuid2")
+	private String id;
+	@NotNull
 	private String dni;
 	private String nombre;
 	private String apellido;
 	private String clave;
 	private int credito;
+	private double nro_telefono;
 	private double valoracionpersonal; //promedio;
 	private String mail;
 	@Enumerated(EnumType.STRING)
@@ -29,6 +34,7 @@ public class Usuario {
 	@OneToOne
 	private Domicilio domicilio;
 	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fecha_nac;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date alta;
@@ -144,5 +150,21 @@ public class Usuario {
 
 	public void setDomicilio(Domicilio domicilio) {
 		this.domicilio = domicilio;
+	}
+
+	public double getNro_telefono() {
+		return nro_telefono;
+	}
+
+	public void setNro_telefono(double nro_telefono) {
+		this.nro_telefono = nro_telefono;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 }

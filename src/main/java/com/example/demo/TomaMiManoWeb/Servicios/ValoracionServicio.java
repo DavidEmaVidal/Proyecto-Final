@@ -19,9 +19,9 @@ public class ValoracionServicio {
     private UsuarioRepositorio usuariorepositorio;
 
     @Transactional
-    public void valorarUsuario(String dni,String id_valoracion, String puntaje, String comentario) {
+    public void valorarUsuario(String id_usu,String id_valoracion, String puntaje, String comentario) {
 
-        Usuario usuario = usuariorepositorio.getOne(dni);
+        Usuario usuario = usuariorepositorio.getOne(id_usu);
         //debo convertirlo a un numero ya que en html se como String (parsear)
         int puntajeparseado = Integer.parseInt(puntaje);
 
@@ -32,13 +32,13 @@ public class ValoracionServicio {
         valoracion.setComentario(comentario.toUpperCase());
 
         valoracionrepositorio.save(valoracion);
-        promedio( dni,id_valoracion, puntaje);
+        promedio( id_usu,id_valoracion, puntaje);
 
     }
 
 
-    public void promedio(String dni,String id_valoracion, String puntaje) {
-        Usuario usuario = usuariorepositorio.getOne(dni);
+    public void promedio(String id_usu,String id_valoracion, String puntaje) {
+        Usuario usuario = usuariorepositorio.getOne(id_usu);
        // List<Valoracion> valoracions = valoracionrepositorio.buscartodaslasValoraciones(dni);
         //Integer total=0;
         //int cant_valo=0;

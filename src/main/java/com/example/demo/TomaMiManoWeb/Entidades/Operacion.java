@@ -1,5 +1,6 @@
 package com.example.demo.TomaMiManoWeb.Entidades;
 
+import com.example.demo.TomaMiManoWeb.Enumeraciones.Categorias;
 import com.example.demo.TomaMiManoWeb.Enumeraciones.TipoOperacion;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -18,9 +19,12 @@ public class Operacion {
 	@Enumerated(EnumType.STRING)
 	private TipoOperacion tipoOperacion;
 	@ManyToOne
+
 	private  Usuario usuario;
 	@OneToOne
 	private Foto foto;
+	@Enumerated(EnumType.STRING)
+	private Categorias categorias;
 	public Operacion() {
 
 	}
@@ -71,5 +75,13 @@ public class Operacion {
 
 	public void setTipoOperacion(TipoOperacion tipoOperacion) {
 		this.tipoOperacion = tipoOperacion;
+	}
+
+	public Categorias getCategorias() {
+		return categorias;
+	}
+
+	public void setCategorias(Categorias categorias) {
+		this.categorias = categorias;
 	}
 }

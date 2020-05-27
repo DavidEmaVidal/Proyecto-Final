@@ -6,5 +6,7 @@ public enum Departamento {
     GODOY_CRUZ,
     LAS_HERAS,
     LUJAN_DE_CUYO,
-    MAIPU,
+    MAIPU;
+
+
 }

@@ -1,6 +1,6 @@
 package com.example.demo.TomaMiManoWeb.Servicios;
 
-import java.util.Optional;
+import java.util.*;
 
 import javax.transaction.Transactional;
 
@@ -8,9 +8,13 @@ import com.example.demo.TomaMiManoWeb.Entidades.Domicilio;
 import com.example.demo.TomaMiManoWeb.Enumeraciones.Departamento;
 import com.example.demo.TomaMiManoWeb.Enumeraciones.Sexo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,7 +35,7 @@ public class UsuarioServicio implements UserDetailsService{
     private DomicilioServicio domicilioServicio;
     
     @Transactional //con esto estamos diciendo q si el metodo no larga ninguna execpcion, entonces hace un comit a la base de datos y se aplican todos los cambios. En el caso q exista una excepcion y no es atrapada se vuelve atras con la transaccion  y no se aplica nada en la base de datos
-    public void registrar(MultipartFile archivo, String  dni, String nombre, String apellido, String clave,String calle, int nro, Departamento depto, Sexo sexo) throws ErrorServicio
+    public void registrar(MultipartFile archivo, String  dni, String nombre, String apellido, String clave, String calle, int nro, Departamento depto, Sexo sexo, Double nro_tel, String mail, String clave2) throws ErrorServicio
     {
 
 
@@ -39,12 +43,18 @@ public class UsuarioServicio implements UserDetailsService{
         validar(dni,nombre,apellido,clave);
         
         Usuario usuario = new Usuario();
+        Date fecha = new Date();
         usuario.setDni(dni);
         usuario.setNombre(nombre);
         usuario.setApellido(apellido);
-        usuario.setClave(clave);
+        String encriptada = new BCryptPasswordEncoder().encode(clave);
+        usuario.setClave(encriptada);
         usuario.setCredito(1);
+        usuario.setAlta(fecha);
         usuario.setSexo(sexo);
+//        usuario.setFecha_nac(((Time) f_nac));
+        usuario.setNro_telefono(nro_tel);
+        usuario.setMail(mail);
         Foto foto = fotoServicio.guardar(archivo);
         Domicilio domicilio =  domicilioServicio.registrarDomicilio(calle,nro,depto);
         usuario.setDomicilio(domicilio);
@@ -56,12 +66,12 @@ public class UsuarioServicio implements UserDetailsService{
     }
     
     @Transactional
-    public void modificar(MultipartFile archivo,String  dni, String nombre,String apellido, String clave, int credito) throws ErrorServicio
+    public void modificar(MultipartFile archivo,String id,String  dni, String nombre,String apellido, String clave, int credito) throws ErrorServicio
     {
 
         validar(dni,nombre,apellido,clave);
         
-        Optional<Usuario> respuesta = (Optional<Usuario>) usuarioRepositorio.findById(dni);
+        Optional<Usuario> respuesta = (Optional<Usuario>) usuarioRepositorio.findById(id);
         
         if(respuesta.isPresent())
         {
@@ -117,7 +127,23 @@ public class UsuarioServicio implements UserDetailsService{
 	}
 
     @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        return null;
+    public UserDetails loadUserByUsername(String dni) throws UsernameNotFoundException {
+        Usuario usuario = usuarioRepositorio.buscarPorDNI(dni);
+
+        if (usuario != null) {
+
+            List<GrantedAuthority> permisos = new ArrayList<>();
+
+            GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_USUARIO_REGISTRADO");
+            permisos.add(p1);
+
+
+            User user = new User(usuario.getDni(), usuario.getClave(), permisos);
+            System.out.println(usuario.getDni()+" "+usuario.getNombre());
+            return user;
+
+        } else {
+            return null;
+        }
     }
 }

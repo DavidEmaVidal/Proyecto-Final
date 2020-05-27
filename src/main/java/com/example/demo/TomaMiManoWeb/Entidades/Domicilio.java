@@ -7,14 +7,14 @@ import javax.persistence.*;
 
 @Entity
 public class Domicilio {
- @Id
- @GeneratedValue(generator = "uuid")
- @GenericGenerator(name = "uuid", strategy = "uuid2")
- private String id_domicilio;
- private String calle;
- private int nro;
-@Enumerated(EnumType.STRING)
-private Departamento departamento;
+    @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    private String id_domicilio;
+    private String calle;
+    private int nro;
+    @Enumerated(EnumType.STRING)
+    private Departamento departamento;
 
     public Domicilio() {
     }
